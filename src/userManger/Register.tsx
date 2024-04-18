@@ -7,22 +7,29 @@ import { useNavigate } from 'react-router-dom';
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState([''])
+    const [roles, setRoles] = useState([''])
     const navigate = useNavigate();
 
-    function register(){
-        const user = {email,password, role};
-        axios.post(GlobalConstants.baseUrl+"/register",user)
+   function login(){
+        const userLogin = {email,password};
+       axios.post(GlobalConstants.baseUrl+"/login_check",userLogin)
             .then((response)=>{
-                console.log(true)
                 console.log(response.data)
-                setTimeout(()=>{
-                    navigate(GlobalConstants.baseUrl+response.data)
-                    window.location.reload()
-                },500)
+                localStorage.setItem("bearerToken",response.data.token)
+                console.log(GlobalConstants.token)
             })
     }
 
+    function register()
+    {
+        const userRegister = {email,password, roles};
+        axios.post("https://localhost:8000/register",userRegister)
+            .then((response)=>{
+                login()
+                console.log(GlobalConstants.token)
+                navigate(response.data)
+            })
+    }
 
 
     return (
@@ -45,7 +52,7 @@ export default function Register() {
                            name="options"
                            id="option1"
                            autoComplete="off"
-                           onChange={() => setRole(["spectator"])}
+                           onChange={() => setRoles(["spectator"])}
                     />
                     <label className="btn btn-primary me-2" htmlFor="option1">Spectateur</label>
 
@@ -54,7 +61,7 @@ export default function Register() {
                            name="options"
                            id="option2"
                            autoComplete="off"
-                           onChange={() => setRole(["comedian"])}
+                           onChange={() => setRoles(["comedian"])}
                     />
                     <label className="btn btn-primary me-2" htmlFor="option2">Comédien/Artiste</label>
 
@@ -63,7 +70,7 @@ export default function Register() {
                            name="options"
                            id="option3"
                            autoComplete="off"
-                           onChange={() => setRole(["establishment"])}
+                           onChange={() => setRoles(["establishment"])}
                     />
                     <label className="btn btn-primary me-2" htmlFor="option3">Etablissement</label>
 
@@ -71,13 +78,13 @@ export default function Register() {
                            className="btn-check"
                            name="options" id="option4"
                            autoComplete="off"
-                           onChange={() => setRole(["club"])}
+                           onChange={() => setRoles(["club"])}
                     />
                     <label className="btn btn-primary" htmlFor="option4">Comedy Club</label>
                 </div>
 
                 <div>
-                    <button onClick={register} className="mb-3 btn btn-outline-success">Etape suivante </button>
+                    <button onClick={register} className="mb-3 btn btn-outline-success">Etape suivante</button>
                     <p>Déjà un compte ? <a href="/login">Se connecter</a></p>
                 </div>
             </div>

@@ -1,27 +1,27 @@
 import axiosHttp from "../auth/interceptor.ts";
 import {GlobalConstants} from "../common/global-constants.ts";
 import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+//import {useNavigate} from "react-router-dom";
 
 export default function EstablishmentForm()
 {
     const [siret , setSiret] = useState("");
     const [description , setDescription] = useState("");
     const [address , setAddress] = useState("");
-    const [accessibility, setAccessibility] = useState(false);
     const [name , setName] = useState("");
     const [phoneNumber , setPhoneNumber] = useState("");
-    const navigate = useNavigate();
+
+    //const navigate = useNavigate()
+
     async function CreatePlace() {
-        const establishment = {siret , description , address, accessibility , name, phoneNumber}
-        console.log(establishment)
-       await axiosHttp.post(GlobalConstants.baseUrl+"" , establishment)
+         console.log(GlobalConstants.token)
+        const establishment = {siret , description , address, name, phoneNumber}
+     await axiosHttp.post(GlobalConstants.baseUrl+"/establishment/new" , establishment)
             .then(response => {
                 console.log(response.data)
-                setTimeout(()=>{
-                    navigate("/")
-                    window.location.reload()
-                },500)
+                localStorage.setItem("establishmentId", response.data.id)
+                console.log(GlobalConstants.establishmentId)
+                //navigate("/establishment/"+GlobalConstants.establishmentId+"/home")
             })
     }
 
@@ -48,17 +48,6 @@ export default function EstablishmentForm()
                        placeholder="name"
                        onChange={(e) => setName(e.target.value)}
                        className="form-control mb-4"/>
-
-                <div className="form-check form-switch">
-                    <input className="form-check-input"
-                           type="checkbox"
-                           role="switch"
-                           id="flexSwitchCheckDefault"
-                           onChange={(e) => setAccessibility(e.target.checked)}
-                    />
-                    <label className="form-check-label mb-4 ms-1" htmlFor="flexSwitchCheckDefault">acces PMR
-                       </label>
-                </div>
 
 
                 <input type="text"

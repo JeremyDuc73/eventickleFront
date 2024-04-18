@@ -3,22 +3,45 @@ import axios from 'axios';
 import  "react-router-dom";
 import {GlobalConstants} from "../common/global-constants.ts";
 import { useNavigate } from 'react-router-dom';
+import axiosHttp from "../auth/interceptor.ts";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-
     function login(){
         const user = {email,password};
-        axios.post(GlobalConstants.baseUrl+"/token/",user)
+        axios.post(GlobalConstants.baseUrl+"/login_check",user)
             .then((response)=>{
-                localStorage.setItem("bearerToken",response.data)
+                console.log(response.data)
+                localStorage.setItem("bearerToken",response.data.token)
             })
-        setTimeout(()=>{
-            navigate("/")
-            window.location.reload()
-        },500)
+    }
+
+
+
+    function getRole(){
+        login()
+        axiosHttp.get(GlobalConstants.baseUrl+"ROUTE ICI")
+            .then((response)=>{
+                if (response.data.role == "establishment")
+                {
+                    localStorage.setItem("establishmentId", response.data.roleId)
+                    navigate("/establishment/"+response.data.roleId+"/home")
+                } else if (response.data.role == "comedian")
+                {
+                    localStorage.setItem("comedianId", response.data.roleId)
+                    navigate("/comedian/"+response.data.roleId+"/home")
+                } else if (response.data.role == "spectator")
+                {
+                    localStorage.setItem("spectatorId", response.data.roleId)
+                    navigate("/spectator/"+response.data.roleId+"/home")
+                } else if (response.data.role == "comedyClub")
+                {
+                    localStorage.setItem("comedyClubId", response.data.roleId)
+                    navigate("/comedyClub/"+response.data.roleId+"/landing")
+                }
+            })
     }
 
     return (
@@ -36,7 +59,7 @@ export default function Login() {
                        className="form-control mb-5"/>
 
                     <div>
-                        <button onClick={login} className="mb-3 btn btn-outline-success">Se connecter</button>
+                        <button onClick={getRole} className="mb-3 btn btn-outline-success">Se connecter</button>
                         <p>Pas de compte ? <a href="/register">Se créer un compte</a></p>
                     </div>
 
