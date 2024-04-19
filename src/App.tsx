@@ -17,6 +17,8 @@ import Scan from "./comedyClub/Scan.tsx";
 import Logout from "./userManger/Logout.tsx";
 import SpectatorHome from "./spectator/SpectatorHome.tsx";
 import ComedianHome from "./comedian/ComedianHome.tsx";
+import ComedianProfile from "./comedian/ComedianProfile.tsx";
+import {ShowEvent} from "./event/ShowEvent.tsx";
 
 export const App = () => {
     return (
@@ -29,6 +31,8 @@ export const App = () => {
                 <Route path="/establishment/:id/show" element={<EstablishmentInvite />} />
 
                 <Route path="/comedian/:id/home" element={<ComedianHome />} />
+                <Route path="/comedian/:id/profile" element={<ComedianProfile />} />
+
 
                 <Route path="/spectator/:id/home" element={<SpectatorHome />} />
 
@@ -44,6 +48,7 @@ export const App = () => {
 
 
                 <Route path="/event/create" element={<CreateEvent/>} />
+                <Route path="/event/:id" element={<ShowEvent/>}/>
 
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/login" element={<Login />} />
