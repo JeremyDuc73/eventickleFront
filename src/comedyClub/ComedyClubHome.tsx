@@ -10,7 +10,7 @@ export default function ComedyClubHome()
     const [comedyClub, setComedyClub] = useState<ComedyClub>()
 
     useEffect(() => {
-        axiosHttp.get(GlobalConstants.baseUrl+"ROUTE ICI"+id)
+        axiosHttp.get(GlobalConstants.baseUrl+"/club/"+id)
             .then((response)=> {
                 setComedyClub(response.data)
             })

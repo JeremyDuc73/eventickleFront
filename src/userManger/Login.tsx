@@ -13,39 +13,25 @@ export default function Login() {
         const user = {email,password};
         axios.post(GlobalConstants.baseUrl+"/login_check",user)
             .then((response)=>{
-                console.log(response.data)
                 localStorage.setItem("bearerToken",response.data.token)
             })
-    }
-
-
-
-    function getRole(){
-        login()
-        axiosHttp.get(GlobalConstants.baseUrl+"ROUTE ICI")
-            .then((response)=>{
-                if (response.data.role == "establishment")
-                {
-                    localStorage.setItem("establishmentId", response.data.roleId)
-                    navigate("/establishment/"+response.data.roleId+"/home")
-                } else if (response.data.role == "comedian")
-                {
-                    localStorage.setItem("comedianId", response.data.roleId)
-                    navigate("/comedian/"+response.data.roleId+"/home")
-                } else if (response.data.role == "spectator")
-                {
-                    localStorage.setItem("spectatorId", response.data.roleId)
-                    navigate("/spectator/"+response.data.roleId+"/home")
-                } else if (response.data.role == "comedyClub")
-                {
-                    localStorage.setItem("comedyClubId", response.data.roleId)
-                    navigate("/comedyClub/"+response.data.roleId+"/landing")
-                }
+            .then(()=>{
+                axiosHttp.get(GlobalConstants.baseUrl+"/current/user")
+                    .then((response)=>{
+                        if (typeof response.data === "string"){
+                            navigate("/"+response.data+"/new");
+                        }else {
+                            console.log(response.data)
+                            navigate("/"+response.data.role+"/"+response.data.roleId+"/home")
+                        }
+                    })
             })
     }
+
 
     return (
         <>
+
             <div className="mt-5">
                 <h1 className="mb-3">Se Connecter</h1>
                 <input type="email"
@@ -59,7 +45,7 @@ export default function Login() {
                        className="form-control mb-5"/>
 
                     <div>
-                        <button onClick={getRole} className="mb-3 btn btn-outline-success">Se connecter</button>
+                        <button onClick={login} className="mb-3 btn btn-outline-success">Se connecter</button>
                         <p>Pas de compte ? <a href="/register">Se créer un compte</a></p>
                     </div>
 

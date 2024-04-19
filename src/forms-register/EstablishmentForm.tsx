@@ -13,11 +13,11 @@ export default function EstablishmentForm()
 
     const navigate = useNavigate()
 
-    async function CreatePlace() {
-         console.log(localStorage.getItem("bearerToken"))
+    async function createEstablishment() {
+        console.log(localStorage.getItem("bearerToken"))
         const establishment = {siret , description , address, name, phoneNumber}
         console.log(establishment)
-     await axiosHttp.post(GlobalConstants.baseUrl+"/establishment/new" , establishment)
+        await axiosHttp.post(GlobalConstants.baseUrl+"/establishment/new" , establishment)
             .then(response => {
                 console.log(response.data)
                 localStorage.setItem("establishmentId", response.data.id)
@@ -56,7 +56,7 @@ export default function EstablishmentForm()
                        onChange={(e) => setPhoneNumber(e.target.value)}
                        className="form-control mb-5"/>
                 <div>
-                    <button onClick={CreatePlace} className="mb-3 btn btn-outline-success">créer son établissement
+                    <button onClick={createEstablishment} className="mb-3 btn btn-outline-success">créer son établissement
                     </button>
                 </div>
 

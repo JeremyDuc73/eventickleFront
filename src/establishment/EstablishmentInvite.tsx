@@ -10,7 +10,7 @@ export function EstablishmentInvite() {
     const [event, setEvent] = useState<Event>()
     const [status, setStatus] = useState(0)
     useEffect(() => {
-            axiosHttp.get(GlobalConstants.baseUrl+"Route_ici"+ GlobalConstants.establishmentId)
+            axiosHttp.get(GlobalConstants.baseUrl+"Route_ici")
                 .then((response)=>{
                     setEstablishment(response.data)
                     setEvent(response.data)

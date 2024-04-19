@@ -15,6 +15,8 @@ import {EstablishmentInvite} from "./establishment/EstablishmentInvite.tsx";
 import ComedyClubLandingPage from "./comedyClub/ComedyClubLandingPage.tsx";
 import Scan from "./comedyClub/Scan.tsx";
 import Logout from "./userManger/Logout.tsx";
+import SpectatorHome from "./spectator/SpectatorHome.tsx";
+import ComedianHome from "./comedian/ComedianHome.tsx";
 
 export const App = () => {
     return (
@@ -26,14 +28,17 @@ export const App = () => {
                 <Route path="/establishment/:id/edit" element={<EstablishmentEdit />} />
                 <Route path="/establishment/:id/show" element={<EstablishmentInvite />} />
 
-                <Route path="/scan" element={<Scan />} />
+                <Route path="/comedian/:id/home" element={<ComedianHome />} />
 
-                <Route path="/comedyClub/:id/home" element={<ComedyClubHome />} />
-                <Route path="/comedyClub/:id/landing" element={<ComedyClubLandingPage />} />
+                <Route path="/spectator/:id/home" element={<SpectatorHome />} />
+
+                <Route path="/scan" element={<Scan />} />
+                <Route path="/club/:id/home" element={<ComedyClubHome />} />
+                <Route path="/club/:id/landing" element={<ComedyClubLandingPage />} />
 
 
                 <Route path="/establishment/new" element={<EstablishmentForm />} />
-                <Route path="/comedyClub/new" element={<ComedyClubForm />} />
+                <Route path="/club/new" element={<ComedyClubForm />} />
                 <Route path="/spectator/new" element={<SpectatorForm/>} />
                 <Route path="/comedian/new" element={<ComedianForm/>} />
 

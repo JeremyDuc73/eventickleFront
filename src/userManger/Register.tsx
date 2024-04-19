@@ -23,7 +23,7 @@ export default function Register() {
     async function register()
     {
         const userRegister = {email,password, roles};
-        await axios.post("https://localhost:8000/register",userRegister)
+        await axios.post("https://apieventickle.oscadeberranger.com/register",userRegister)
             .then((response)=>{
                 login()
                 setTimeout(() => {

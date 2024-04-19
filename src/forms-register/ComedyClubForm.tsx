@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 import {GlobalConstants} from "../common/global-constants.ts";
+import axiosHttp from "../auth/interceptor.ts";
 
 export default function ComedyClubForm()
 {
@@ -11,10 +11,12 @@ export default function ComedyClubForm()
     function createComedyClub()
     {
         const comedyClub = {name}
-        axios.post(GlobalConstants.baseUrl+"ROUTE ICI", comedyClub)
+        axiosHttp.post(GlobalConstants.baseUrl+"/club/new", comedyClub)
             .then((response)=>{
                 console.log(response.data)
-                navigate("/login")
+                localStorage.setItem("comedyClubId", response.data.id)
+                console.log(localStorage.getItem("comedyClubId"))
+                navigate("/club/"+localStorage.getItem("comedyClubId")+"/landing")
             })
     }
 

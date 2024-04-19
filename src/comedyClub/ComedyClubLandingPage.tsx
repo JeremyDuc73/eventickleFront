@@ -7,7 +7,7 @@ export default function ComedyClubLandingPage()
     return (
         <div style={{height: "100vh"}} className="d-flex flex-column justify-content-center align-items-center">
             <button type="button" className="btn btn-primary btn-lg mb-5">SCANNER LES BILLETS</button>
-            <button onClick={() => navigate("/")} type="button" className="btn btn-secondary">INTERFACE WEB</button>
+            <button onClick={() => navigate("/club/"+localStorage.getItem("comedyClubId")+"/home")} type="button" className="btn btn-secondary">INTERFACE WEB</button>
         </div>
     )
 }

@@ -1,24 +1,26 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import axios from "axios";
 import {GlobalConstants} from "../common/global-constants.ts";
+import axiosHttp from "../auth/interceptor.ts";
 
 export default function ComedianForm()
 {
-    const [firstName, setFirstName] = useState("")
-    const [surName, setSurName] = useState("")
-    const [decription, setDescription] = useState("")
+    const [name, setName] = useState("")
+    const [surname, setSurname] = useState("")
+    const [description, setDescription] = useState("")
 
     const navigate = useNavigate()
 
     function createComedian()
     {
-        const comedian = {firstName, surName, decription}
+        const comedian = {name, surname, description}
         console.log(comedian)
-        axios.post(GlobalConstants.baseUrl+"/comedian/new", comedian)
+        axiosHttp.post(GlobalConstants.baseUrl+"/comedian/new", comedian)
             .then((response)=>{
                 console.log(response.data)
-                navigate("/login")
+                localStorage.setItem("comedianId", response.data.id)
+                console.log(localStorage.getItem("comedianId"))
+                navigate("/comedian/"+localStorage.getItem("comedianId")+"/home")
             })
     }
 
@@ -28,12 +30,12 @@ export default function ComedianForm()
                 <h1 className="mb-3">Créer son profil de comédien</h1>
                 <input type="text"
                        placeholder="Votre prénom"
-                       onChange={(e) => setFirstName(e.target.value)}
+                       onChange={(e) => setName(e.target.value)}
                        className="form-control mb-4"
                 />
                 <input type="text"
                        placeholder="Votre nom"
-                       onChange={(e) => setSurName(e.target.value)}
+                       onChange={(e) => setSurname(e.target.value)}
                        className="form-control mb-4"
                 />
                 <textarea style={{resize: "none"}}
