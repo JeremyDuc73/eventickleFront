@@ -9,7 +9,7 @@ import ComedyClubForm from "./forms-register/ComedyClubForm.tsx";
 import ComedianForm from "./forms-register/ComedianForm.tsx";
 import {EstablishmentHome} from "./establishment/EstablishmentHome.tsx";
 import EstablishmentEdit from "./establishment/EstablishmentEdit.tsx";
-import CreateEventStep1 from "./event/CreateEventStep1.tsx";
+import CreateEvent from "./event/CreateEvent.tsx";
 import ComedyClubHome from "./comedyClub/ComedyClubHome.tsx";
 import {EstablishmentInvite} from "./establishment/EstablishmentInvite.tsx";
 import ComedyClubLandingPage from "./comedyClub/ComedyClubLandingPage.tsx";
@@ -43,7 +43,7 @@ export const App = () => {
                 <Route path="/comedian/new" element={<ComedianForm/>} />
 
 
-                <Route path="/event/create" element={<CreateEventStep1/>} />
+                <Route path="/event/create" element={<CreateEvent/>} />
 
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/login" element={<Login />} />

@@ -18,6 +18,34 @@ export function Navbar() {
                                 <a className="nav-link" href="#">Pricing</a>
                             </li>
                         </ul>
+                        {localStorage.getItem("role") == "comedian" ?
+                            <>
+                                <p>comedien</p>
+                            </>
+                            :
+                            <></>
+                        }
+                        {localStorage.getItem("role") === "specator" ?
+                            <>
+                                <p>spectator</p>
+                            </>
+                            :
+                            <></>
+                        }
+                        {localStorage.getItem("role") == "club" ?
+                            <>
+                                <p>club</p>
+                            </>
+                            :
+                            <></>
+                        }
+                        {localStorage.getItem("role") == "establishment" ?
+                            <>
+                                <p>establishment</p>
+                            </>
+                            :
+                            <></>
+                        }
                         {!localStorage.getItem("bearerToken") ?
                             <>
                                 <a href="/register" type="button" className="btn btn-primary">S'inscrire</a>
@@ -28,6 +56,7 @@ export function Navbar() {
                                 <a href="/logout" type="button" className="btn btn-primary ms-2">Se déconnecter</a>
                             </>
                         }
+
                     </div>
                 </div>
             </nav>

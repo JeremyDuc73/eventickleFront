@@ -5,7 +5,7 @@ export default function Logout()
 {
     const navigate = useNavigate()
     useEffect(() => {
-        localStorage.removeItem("bearerToken")
+        localStorage.clear()
         navigate("/login")
         window.location.reload()
     }, []);

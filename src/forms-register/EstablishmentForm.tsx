@@ -11,7 +11,6 @@ export default function EstablishmentForm()
     const [name , setName] = useState("");
     const [phoneNumber , setPhoneNumber] = useState("");
     const [equipmentIds, setEquipmentIds] = useState([])
-    setEquipmentIds([])
     const navigate = useNavigate()
 
     async function createEstablishment() {
@@ -55,6 +54,9 @@ export default function EstablishmentForm()
                        placeholder="phoneNumber"
                        onChange={(e) => setPhoneNumber(e.target.value)}
                        className="form-control mb-5"/>
+                <input type="hidden"
+                       onChange={()=>setEquipmentIds([])}
+                />
                 <div>
                     <button onClick={createEstablishment} className="mb-3 btn btn-outline-success">créer son établissement
                     </button>

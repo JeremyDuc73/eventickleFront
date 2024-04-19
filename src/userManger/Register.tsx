@@ -3,6 +3,7 @@ import axios from 'axios';
 import  "react-router-dom";
 import {GlobalConstants} from "../common/global-constants.ts";
 import { useNavigate } from 'react-router-dom';
+import axiosHttp from "../auth/interceptor.ts";
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -10,13 +11,19 @@ export default function Register() {
     const [roles, setRoles] = useState([''])
     const navigate = useNavigate();
 
-   function login(){
-       const userLogin = {email,password};
-       axios.post(GlobalConstants.baseUrl+"/login_check",userLogin)
+    function login(){
+        const user = {email,password};
+        axios.post(GlobalConstants.baseUrl+"/login_check",user)
             .then((response)=>{
-                console.log(response.data)
                 localStorage.setItem("bearerToken",response.data.token)
-                console.log(localStorage.getItem("bearerToken"))
+            })
+            .then(()=>{
+                axiosHttp.get(GlobalConstants.baseUrl+"/current/user")
+                    .then((response)=>{
+                            localStorage.setItem("role",response.data)
+                            navigate("/"+response.data+"/new");
+                            window.location.reload()
+                    })
             })
     }
 
@@ -24,13 +31,8 @@ export default function Register() {
     {
         const userRegister = {email,password, roles};
         await axios.post("https://apieventickle.oscadeberranger.com/register",userRegister)
-            .then((response)=>{
+            .then(()=>{
                 login()
-                setTimeout(() => {
-                    console.log(localStorage.getItem("bearerToken"))
-                    navigate(response.data)
-                    window.location.reload()
-                }, 2000)
             })
     }
 

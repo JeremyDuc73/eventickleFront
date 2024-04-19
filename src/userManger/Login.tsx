@@ -19,12 +19,15 @@ export default function Login() {
                 axiosHttp.get(GlobalConstants.baseUrl+"/current/user")
                     .then((response)=>{
                         if (typeof response.data === "string"){
+                            localStorage.setItem("role",response.data)
                             navigate("/"+response.data+"/new");
+                            window.location.reload()
                         }else {
+                            localStorage.setItem("role",response.data.role)
+                            localStorage.setItem("roleId",response.data.roleId)
                             console.log(response.data)
-                            localStorage.setItem("roleId", response.data.roleId)
-                            localStorage.setItem("role", response.data.role)
                             navigate("/"+response.data.role+"/"+response.data.roleId+"/home")
+                            window.location.reload()
                         }
                     })
             })
@@ -46,10 +49,10 @@ export default function Login() {
                        onChange={(e)=>setPassword(e.target.value)}
                        className="form-control mb-5"/>
 
-                    <div>
-                        <button onClick={login} className="mb-3 btn btn-outline-success">Se connecter</button>
-                        <p>Pas de compte ? <a href="/register">Se créer un compte</a></p>
-                    </div>
+                <div>
+                    <button onClick={login} className="mb-3 btn btn-outline-success">Se connecter</button>
+                    <p>Pas de compte ? <a href="/register">Se créer un compte</a></p>
+                </div>
 
             </div>
         </>
