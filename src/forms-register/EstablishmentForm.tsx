@@ -58,7 +58,7 @@ export default function EstablishmentForm()
                        onChange={()=>setEquipmentIds([])}
                 />
                 <div>
-                    <button onClick={createEstablishment} className="mb-3 btn btn-outline-success">créer son établissement
+                    <button onClick={()=>createEstablishment()} className="mb-3 btn btn-outline-success">créer son établissement
                     </button>
                 </div>
 

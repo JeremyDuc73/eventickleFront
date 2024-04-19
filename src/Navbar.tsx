@@ -26,7 +26,7 @@ export function Navbar() {
                         }
                         {localStorage.getItem("role") == "club" ?
                             <>
-                            <a href="/create/event" type="button" className="btn btn-primary">Créer un événement</a>
+                            <a href="/event/create" type="button" className="btn btn-primary">Créer un événement</a>
                             </>
                             : <></>
                         }

@@ -5,7 +5,7 @@ export interface Establishment {
     id:number
     siret: string
     description : string
-    adress : string
+    address : string
     availability : Availability[]
     accessibility : string
     equipments : Equipment[]

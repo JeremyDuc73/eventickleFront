@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import axiosHttp from "../auth/interceptor.ts";
 import {GlobalConstants} from "../common/global-constants.ts";
-import moment from 'moment';
 import {useNavigate} from "react-router-dom";
 
 
@@ -15,7 +14,7 @@ export default function ComedianHome()
         axiosHttp.get(GlobalConstants.baseUrl+"/events")
             .then(response => {
                 setEvents(response.data);
-                console.log(response.data);
+                //  console.log(response.data);
             });
     }, []);
 
@@ -28,7 +27,7 @@ export default function ComedianHome()
 
                 <div>
                     {events.map((event: Event) => (
-                        <div key={event.id} className="card" onClick={ ()=> navigate("/event/"+ event.id)}>
+                        <div key={event.id} className="card mb-2 p-2" onClick={ ()=> navigate("/event/"+ event.id)}>
 
                             <h5>{ event.name }</h5>
                             <p>{ event.date }</p>

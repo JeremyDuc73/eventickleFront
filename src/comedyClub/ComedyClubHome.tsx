@@ -13,12 +13,27 @@ export default function ComedyClubHome()
         axiosHttp.get(GlobalConstants.baseUrl+"/club/"+id)
             .then((response)=> {
                 setComedyClub(response.data)
+                console.log(response.data.organizedEvents)
             })
     }, []);
 
     return (
         <>
             <h1>{comedyClub?.name}</h1>
+            <h2>Events : </h2>
+            {comedyClub?.organizedEvents ?
+                <>
+                    {comedyClub!.organizedEvents.map((item, i) => {
+                        return (<>
+                                <p>{item.name}</p>
+                            </>
+                        )
+                    })}
+                </>:
+                <>
+                </>
+            }
+
         </>
     )
 }

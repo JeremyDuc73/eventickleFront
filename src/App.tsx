@@ -8,7 +8,6 @@ import SpectatorForm from "./forms-register/SpectatorForm.tsx";
 import ComedyClubForm from "./forms-register/ComedyClubForm.tsx";
 import ComedianForm from "./forms-register/ComedianForm.tsx";
 import {EstablishmentHome} from "./establishment/EstablishmentHome.tsx";
-import EstablishmentEdit from "./establishment/EstablishmentEdit.tsx";
 import CreateEvent from "./event/CreateEvent.tsx";
 import ComedyClubHome from "./comedyClub/ComedyClubHome.tsx";
 import {EstablishmentInvite} from "./establishment/EstablishmentInvite.tsx";
@@ -19,6 +18,9 @@ import SpectatorHome from "./spectator/SpectatorHome.tsx";
 import ComedianHome from "./comedian/ComedianHome.tsx";
 import ComedianProfile from "./comedian/ComedianProfile.tsx";
 import {ShowEvent} from "./event/ShowEvent.tsx";
+import {CreateEventStep2} from "./event/CreateEventStep2.tsx";
+import ComedianProfileInvites from "./comedian/ComedianProfileInvites.tsx";
+import {CreateEventStep3} from "./event/CreateEventStep3.tsx";
 
 export const App = () => {
     return (
@@ -27,11 +29,11 @@ export const App = () => {
                 <Route path="/" element={<Home />} />
 
                 <Route path="/establishment/:id/home" element={<EstablishmentHome />} />
-                <Route path="/establishment/:id/edit" element={<EstablishmentEdit />} />
                 <Route path="/establishment/:id/show" element={<EstablishmentInvite />} />
 
                 <Route path="/comedian/:id/home" element={<ComedianHome />} />
                 <Route path="/comedian/:id/profile" element={<ComedianProfile />} />
+                <Route path="/comedian/:id/profile/invites" element={<ComedianProfileInvites />} />
 
 
                 <Route path="/spectator/:id/home" element={<SpectatorHome />} />
@@ -48,6 +50,8 @@ export const App = () => {
 
 
                 <Route path="/event/create" element={<CreateEvent/>} />
+                <Route path="/event/create/step2" element={<CreateEventStep2/>} />
+                <Route path="/event/create/step3" element={<CreateEventStep3/>} />
                 <Route path="/event/:id" element={<ShowEvent/>}/>
 
                 <Route path="/logout" element={<Logout />} />
