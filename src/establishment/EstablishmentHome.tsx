@@ -58,9 +58,6 @@ export function EstablishmentHome() {
                                 <span>{events.date}</span>
                             </div>
                             <div className="">
-                                <img src={events.image} alt="non"/>
-                            </div>
-                            <div className="">
                                 <span>{events.description}</span>
                             </div>
                             <div className="">

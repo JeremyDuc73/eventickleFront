@@ -14,7 +14,7 @@ export default function EstablishmentEdit()
 
     async function editEstablishment(){
         const editedEstablishment = {name,description,siret, address,accessibility,phoneNumber}
-        await axiosHttp.post(GlobalConstants.baseUrl+'/establishment/'+GlobalConstants.establishmentId+'/edit',editedEstablishment)
+        await axiosHttp.post(GlobalConstants.baseUrl+'/establishment/'+localStorage.getItem("establishmentId")+'/edit',editedEstablishment)
             .then((response) => {
                 console.log(response.data);
             })

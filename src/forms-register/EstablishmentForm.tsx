@@ -10,12 +10,13 @@ export default function EstablishmentForm()
     const [address , setAddress] = useState("");
     const [name , setName] = useState("");
     const [phoneNumber , setPhoneNumber] = useState("");
-
+    const [equipmentIds, setEquipmentIds] = useState([])
+    setEquipmentIds([])
     const navigate = useNavigate()
 
     async function createEstablishment() {
         console.log(localStorage.getItem("bearerToken"))
-        const establishment = {siret , description , address, name, phoneNumber}
+        const establishment = {siret , description , address, name, phoneNumber, equipmentIds}
         console.log(establishment)
         await axiosHttp.post(GlobalConstants.baseUrl+"/establishment/new" , establishment)
             .then(response => {
@@ -49,7 +50,6 @@ export default function EstablishmentForm()
                        placeholder="name"
                        onChange={(e) => setName(e.target.value)}
                        className="form-control mb-4"/>
-
 
                 <input type="text"
                        placeholder="phoneNumber"

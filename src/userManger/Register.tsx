@@ -29,6 +29,7 @@ export default function Register() {
                 setTimeout(() => {
                     console.log(localStorage.getItem("bearerToken"))
                     navigate(response.data)
+                    window.location.reload()
                 }, 2000)
             })
     }

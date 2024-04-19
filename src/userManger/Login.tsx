@@ -22,6 +22,8 @@ export default function Login() {
                             navigate("/"+response.data+"/new");
                         }else {
                             console.log(response.data)
+                            localStorage.setItem("roleId", response.data.roleId)
+                            localStorage.setItem("role", response.data.role)
                             navigate("/"+response.data.role+"/"+response.data.roleId+"/home")
                         }
                     })
