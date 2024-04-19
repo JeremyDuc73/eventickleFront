@@ -11,7 +11,7 @@ export function EstablishmentHome() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(GlobalConstants.establishmentId)
+        console.log(localStorage.getItem("establishmentId"))
         axiosHttp.get(GlobalConstants.baseUrl+"/establishment/"+id)
             .then((response)=>{
                 setEstablishment(response.data)
@@ -39,7 +39,7 @@ export function EstablishmentHome() {
                     <img src={establishment?.image} alt="non"/>
                     <span>{establishment?.description}</span>
                     <span>{establishment?.adress}</span>
-                    <a onClick={() => navigate("/establishment/" + GlobalConstants.establishmentId + "/edit")}
+                    <a onClick={() => navigate("/establishment/" + localStorage.getItem("establishmentId") + "/edit")}
                        className="btn btn-outline-warning">Editer
                         ce </a>
                 </div>
@@ -50,7 +50,7 @@ export function EstablishmentHome() {
             <div className="mainContent">
                 {establishment?.events.map((events: Event) => (
                     <div key={events.id}>
-                        <div className="">
+                        <div>
                             <div className="">
                                 <span>{events.name}</span>
                             </div>

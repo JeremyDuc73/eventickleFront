@@ -11,23 +11,25 @@ export default function Register() {
     const navigate = useNavigate();
 
    function login(){
-        const userLogin = {email,password};
+       const userLogin = {email,password};
        axios.post(GlobalConstants.baseUrl+"/login_check",userLogin)
             .then((response)=>{
                 console.log(response.data)
                 localStorage.setItem("bearerToken",response.data.token)
-                console.log(GlobalConstants.token)
+                console.log(localStorage.getItem("bearerToken"))
             })
     }
 
-    function register()
+    async function register()
     {
         const userRegister = {email,password, roles};
-        axios.post("https://localhost:8000/register",userRegister)
+        await axios.post("https://localhost:8000/register",userRegister)
             .then((response)=>{
                 login()
-                console.log(GlobalConstants.token)
-                navigate(response.data)
+                setTimeout(() => {
+                    console.log(localStorage.getItem("bearerToken"))
+                    navigate(response.data)
+                }, 2000)
             })
     }
 

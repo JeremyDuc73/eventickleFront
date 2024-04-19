@@ -10,7 +10,7 @@ const axiosHttp = axios.create({
 axiosHttp.interceptors.request.use(
     // @ts-expect-error it's okay
     (config) => {
-        const token =  GlobalConstants.token
+        const token =  localStorage.getItem("bearerToken")
         return {
             ...config,
             headers: {

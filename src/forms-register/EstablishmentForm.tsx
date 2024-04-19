@@ -1,7 +1,7 @@
 import axiosHttp from "../auth/interceptor.ts";
 import {GlobalConstants} from "../common/global-constants.ts";
 import {useState} from "react";
-//import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export default function EstablishmentForm()
 {
@@ -11,17 +11,18 @@ export default function EstablishmentForm()
     const [name , setName] = useState("");
     const [phoneNumber , setPhoneNumber] = useState("");
 
-    //const navigate = useNavigate()
+    const navigate = useNavigate()
 
     async function CreatePlace() {
-         console.log(GlobalConstants.token)
+         console.log(localStorage.getItem("bearerToken"))
         const establishment = {siret , description , address, name, phoneNumber}
+        console.log(establishment)
      await axiosHttp.post(GlobalConstants.baseUrl+"/establishment/new" , establishment)
             .then(response => {
                 console.log(response.data)
                 localStorage.setItem("establishmentId", response.data.id)
-                console.log(GlobalConstants.establishmentId)
-                //navigate("/establishment/"+GlobalConstants.establishmentId+"/home")
+                console.log(localStorage.getItem("establishmentId"))
+                navigate("/establishment/"+localStorage.getItem("establishmentId")+"/home")
             })
     }
 
